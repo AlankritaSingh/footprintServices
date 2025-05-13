@@ -1,0 +1,1 @@
+{"version":3,"file":"InvalidTransportIdentifierError.js","sourceRoot":"","sources":["../../../../src/lib/error/InvalidTransportIdentifierError.ts"],"names":[],"mappings":";;AAAA,MAAqB,+BAAgC,SAAQ,KAAK;IAChE,YAAY,IAAY;QACtB,MAAM,OAAO,GAAG,kEAAkE,IAAI,EAAE,CAAC;QACzF,KAAK,CAAC,OAAO,CAAC,CAAC;QACf,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC,WAAW,CAAC,IAAI,CAAC;IACpC,CAAC;CACF;AAND,kDAMC"}

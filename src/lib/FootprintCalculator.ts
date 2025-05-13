@@ -1,39 +1,54 @@
 import { footprintResult, footPrintData, transportData } from "./types";
 import { getFootprintData, getTransportData } from "./externalServices";
+import { Logger } from "winston";
+import InvalidFootprintIdentifierError from "./error/InvalidFootprintIdentifierError";
+import InvalidTransportIdentifierError from "./error/InvalidTransportIdentifierError";
+import logger from "./logger/logger";
 
 export class FootprintCalculator {
-  private footprint: string;
-  private transport: string;
-  private targetCountry: string;
+  constructor(private log: Logger) {}
 
-  constructor(footprint: string, transport: string, targetCountry: string) {
-    this.footprint = footprint;
-    this.transport = transport;
-    this.targetCountry = targetCountry;
-  }
-
-  public async calculateFootprint(): Promise<footprintResult> {
+  public async calculateFootprint(
+    footprint: string,
+    transport: string,
+    targetCountry: string
+  ): Promise<footprintResult> {
     const { footprintData, transportData } =
-      await this.getFootprintAndTransportData();
+      await this.getFootprintAndTransportData(logger);
 
-    const footprint = footprintData.find(
-      (data) => data.identifier === this.footprint
+    this.log.info(`Finished fetching data from external services`);
+
+    const footprintInfo = footprintData.find(
+      (data) => data.identifier === footprint
     );
-    const transport = transportData.find(
+
+    if (!footprintInfo) {
+      throw new InvalidFootprintIdentifierError(footprint);
+    }
+
+    const transportInfo = transportData.find(
       (data) =>
-        data.identifier === this.transport &&
-        data.target_country === this.targetCountry &&
-        data.origin_country === footprint?.country
+        data.identifier === transport &&
+        data.target_country === targetCountry &&
+        data.origin_country === footprintInfo.country
     );
+
+    if (!transportInfo) {
+      throw new InvalidTransportIdentifierError(transport);
+    }
+
+    const calculatedFootprint =
+      footprintInfo.footprint_value * transportInfo.factor;
+
+    this.log.info(`Finished calculating footprint data`);
+
     return {
       result:
-        (footprint!.footprint_value * transport!.factor).toString() +
-        " " +
-        footprint!.footprint_unit,
+        calculatedFootprint.toString() + " " + footprintInfo.footprint_unit,
     };
   }
 
-  async getFootprintAndTransportData(): Promise<{
+  async getFootprintAndTransportData(logger: Logger): Promise<{
     footprintData: footPrintData[];
     transportData: transportData[];
   }> {
@@ -41,10 +56,10 @@ export class FootprintCalculator {
     let transportData: transportData[] = [];
 
     await Promise.all([
-      getFootprintData().then((result) => {
+      getFootprintData(logger).then((result) => {
         footprintData = result;
       }),
-      getTransportData().then((result) => {
+      getTransportData(logger).then((result) => {
         transportData = result;
       }),
     ]);

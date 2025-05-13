@@ -3,6 +3,5 @@ export default class InvalidTransportIdentifierError extends Error {
     const message = `Invalid Identifier: no transport data found for the identifier ${code}`;
     super(message);
     this.name = this.constructor.name;
-    Error.captureStackTrace(this, this.constructor);
   }
 }

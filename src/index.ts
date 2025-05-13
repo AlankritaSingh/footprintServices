@@ -1,11 +1,12 @@
 import createApp from "./lib/app";
+import logger from "./lib/logger/logger";
 
 const { PORT = 3000 } = process.env;
 
-const app = createApp();
+const app = createApp(logger);
 
 app
-  .on("error", (err) => console.error(err.stack))
+  .on("error", (err) => logger.error(err.stack))
   .listen(PORT, () => {
-    console.log(`App is listening on port ${PORT}`);
+    logger.info(`App is listening on port ${PORT}`);
   });
