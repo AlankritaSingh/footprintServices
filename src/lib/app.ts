@@ -11,6 +11,7 @@ export default () => {
 
   app.post<unknown, footprintResult, footPrintPayload>(
     "/calculate",
+    express.json(),
     async (req, res) => {
       const footPrintPayload = req.body;
       const { footprint, transport, targetCountry } = footPrintPayload;
