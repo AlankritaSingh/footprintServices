@@ -1,7 +1,7 @@
 import assert from "assert/strict";
 import sinon from "sinon";
 import type { SinonStubbedInstance } from "sinon";
-import { FootprintCalculator } from "../src/lib/FootprintCalculator";
+import { FootprintCalculator } from "../src/lib/service/FootprintCalculator";
 import logger from "../src/lib/logger/logger";
 
 describe("FootprintCalculator", () => {

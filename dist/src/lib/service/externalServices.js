@@ -6,9 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getFootprintData = getFootprintData;
 exports.getTransportData = getTransportData;
 const axios_1 = __importDefault(require("axios"));
+const FOOTPRINT_URL = "https://frankvisuals.github.io/co2-data/footprints.json";
+const TRANSPORT_URL = "https://frankvisuals.github.io/co2-data/transport.json";
 async function getFootprintData(logger) {
     try {
-        const response = await axios_1.default.get("https://frankvisuals.github.io/co2-data/footprints.json");
+        const response = await axios_1.default.get(FOOTPRINT_URL);
         return response.data;
     }
     catch (error) {
@@ -31,7 +33,7 @@ async function getFootprintData(logger) {
 }
 async function getTransportData(logger) {
     try {
-        const response = await axios_1.default.get("https://frankvisuals.github.io/co2-data/transport.json");
+        const response = await axios_1.default.get(TRANSPORT_URL);
         return response.data;
     }
     catch (error) {

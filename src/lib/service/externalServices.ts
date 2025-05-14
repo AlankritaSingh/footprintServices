@@ -1,14 +1,15 @@
 import axios from "axios";
-import { footPrintData, transportData } from "./types";
+import { footPrintData, transportData } from "../types";
 import { Logger } from "winston";
+
+const FOOTPRINT_URL = "https://frankvisuals.github.io/co2-data/footprints.json";
+const TRANSPORT_URL = "https://frankvisuals.github.io/co2-data/transport.json";
 
 export async function getFootprintData(
   logger: Logger
 ): Promise<footPrintData[]> {
   try {
-    const response = await axios.get<footPrintData[]>(
-      "https://frankvisuals.github.io/co2-data/footprints.json"
-    );
+    const response = await axios.get<footPrintData[]>(FOOTPRINT_URL);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -36,9 +37,7 @@ export async function getTransportData(
   logger: Logger
 ): Promise<transportData[]> {
   try {
-    const response = await axios.get<transportData[]>(
-      "https://frankvisuals.github.io/co2-data/transport.json"
-    );
+    const response = await axios.get<transportData[]>(TRANSPORT_URL);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const http_1 = require("http");
-const FootprintCalculator_1 = require("./FootprintCalculator");
+const FootprintCalculator_1 = require("./service/FootprintCalculator");
 const InvalidFootprintIdentifierError_1 = __importDefault(require("./error/InvalidFootprintIdentifierError"));
 const InvalidTransportIdentifierError_1 = __importDefault(require("./error/InvalidTransportIdentifierError"));
 const validationMiddleware_1 = require("./middleware/validationMiddleware");

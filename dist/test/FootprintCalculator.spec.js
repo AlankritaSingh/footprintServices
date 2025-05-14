@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const strict_1 = __importDefault(require("assert/strict"));
 const sinon_1 = __importDefault(require("sinon"));
-const FootprintCalculator_1 = require("../src/lib/FootprintCalculator");
+const FootprintCalculator_1 = require("../src/lib/service/FootprintCalculator");
 const logger_1 = __importDefault(require("../src/lib/logger/logger"));
 describe("FootprintCalculator", () => {
     let calculator;

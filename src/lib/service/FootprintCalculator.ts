@@ -1,9 +1,9 @@
-import { footprintResult, footPrintData, transportData } from "./types";
+import { footprintResult, footPrintData, transportData } from "../types";
 import { getFootprintData, getTransportData } from "./externalServices";
 import { Logger } from "winston";
-import InvalidFootprintIdentifierError from "./error/InvalidFootprintIdentifierError";
-import InvalidTransportIdentifierError from "./error/InvalidTransportIdentifierError";
-import logger from "./logger/logger";
+import InvalidFootprintIdentifierError from "../error/InvalidFootprintIdentifierError";
+import InvalidTransportIdentifierError from "../error/InvalidTransportIdentifierError";
+import logger from "../logger/logger";
 
 export class FootprintCalculator {
   constructor(private log: Logger) {}

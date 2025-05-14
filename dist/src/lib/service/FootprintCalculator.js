@@ -5,9 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FootprintCalculator = void 0;
 const externalServices_1 = require("./externalServices");
-const InvalidFootprintIdentifierError_1 = __importDefault(require("./error/InvalidFootprintIdentifierError"));
-const InvalidTransportIdentifierError_1 = __importDefault(require("./error/InvalidTransportIdentifierError"));
-const logger_1 = __importDefault(require("./logger/logger"));
+const InvalidFootprintIdentifierError_1 = __importDefault(require("../error/InvalidFootprintIdentifierError"));
+const InvalidTransportIdentifierError_1 = __importDefault(require("../error/InvalidTransportIdentifierError"));
+const logger_1 = __importDefault(require("../logger/logger"));
 class FootprintCalculator {
     constructor(log) {
         this.log = log;

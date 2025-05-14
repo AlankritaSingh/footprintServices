@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import type { ErrorRequestHandler } from "express";
 import { STATUS_CODES } from "http";
-import { FootprintCalculator } from "./FootprintCalculator";
+import { FootprintCalculator } from "./service/FootprintCalculator";
 import { Logger } from "winston";
 import InvalidFootprintIdentifierError from "./error/InvalidFootprintIdentifierError";
 import InvalidTransportIdentifierError from "./error/InvalidTransportIdentifierError";

@@ -6,7 +6,7 @@ import { STATUS_CODES } from "http";
 import logger from "../src/lib/logger/logger";
 import createApp from "../src/lib/app";
 import type { Application } from "express";
-import * as externalServices from "../src/lib/externalServices";
+import * as externalServices from "../src/lib/service/externalServices";
 
 describe("Footprint app", () => {
   let loggerStub: SinonStubbedInstance<typeof logger>;

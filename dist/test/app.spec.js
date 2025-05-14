@@ -42,7 +42,7 @@ const supertest_1 = __importDefault(require("supertest"));
 const http_1 = require("http");
 const logger_1 = __importDefault(require("../src/lib/logger/logger"));
 const app_1 = __importDefault(require("../src/lib/app"));
-const externalServices = __importStar(require("../src/lib/externalServices"));
+const externalServices = __importStar(require("../src/lib/service/externalServices"));
 describe("Footprint app", () => {
     let loggerStub;
     let app;
