@@ -13,6 +13,23 @@
       "preLaunchTask": "npm: build", // Ensure the code is built before debugging
       "outFiles": ["${workspaceFolder}/dist/**/*.js"], // Map compiled JS to TS
       "sourceMaps": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Tests",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha", // Path to Mocha
+      "args": [
+        "--require",
+        "ts-node/register",
+        "--timeout",
+        "10000",
+        "test/**/*.spec.ts" // Path to your test files
+      ],
+      "cwd": "${workspaceFolder}",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"], // Map compiled JS to TS
+      "sourceMaps": true,
+      "internalConsoleOptions": "openOnSessionStart"
     }
   ]
 }

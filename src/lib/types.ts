@@ -1,11 +1,3 @@
-export type footPrintPayload = {
-  footprint: string;
-  transport: string;
-  targetCountry: string;
-};
-
-export type footprint_unit = "kgCO2e";
-
 export type footprint_value = number;
 
 export type footprintResult = {
