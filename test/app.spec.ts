@@ -153,12 +153,14 @@ describe("Footprint app", () => {
       };
 
       getFootprintDataStub.rejects(new Error("Unexpected error"));
+      getTransportDataStub.resolves([]);
 
       const response = await request(app)
         .post("/calculate")
         .send(payload)
         .expect(500);
-      assert.equal(response.text, STATUS_CODES[500]);
+
+      assert.equal(response.text, `${STATUS_CODES[500]}- Unexpected error`);
     });
   });
 });

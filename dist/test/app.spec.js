@@ -163,11 +163,12 @@ describe("Footprint app", () => {
                 targetCountry: "DE",
             };
             getFootprintDataStub.rejects(new Error("Unexpected error"));
+            getTransportDataStub.resolves([]);
             const response = await (0, supertest_1.default)(app)
                 .post("/calculate")
                 .send(payload)
                 .expect(500);
-            strict_1.default.equal(response.text, http_1.STATUS_CODES[500]);
+            strict_1.default.equal(response.text, `${http_1.STATUS_CODES[500]}- Unexpected error`);
         });
     });
 });
