@@ -10,7 +10,9 @@ exports.footPrintPayloadSchema = zod_1.z.object({
         required_error: "transport is required",
     }),
     targetCountry: zod_1.z
-        .string()
+        .string({
+        required_error: "targetCountry is required",
+    })
         .min(2, "targetCountry must be equal to 2 characters")
         .max(2, "targetCountry must be equal to 2 characters"),
 });

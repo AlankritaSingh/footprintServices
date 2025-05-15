@@ -10,33 +10,32 @@ import {
   footPrintPayloadSchema,
   type FootPrintPayload,
 } from "./middleware/schemas/validationSchema";
+import { StatusCodes } from "http-status-codes";
+import { footprintResult } from "./types";
 
 export default (logger: Logger) => {
   const app = express();
 
   app.use(express.json());
 
-  app.get("/", (req, res) => {
-    res.send("Hello, TypeScript with Node.js!");
-  });
-
   app.post(
     "/calculate",
-    // express.json(),
-    validateRequestBody(footPrintPayloadSchema),
+    validateRequestBody(footPrintPayloadSchema, logger), // Middleware to validate the request body
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const footPrintPayload: FootPrintPayload = req.body;
         const { footprint, transport, targetCountry } = footPrintPayload;
+
         const calculator = new FootprintCalculator(logger);
 
-        const calculatedFootprint = await calculator.calculateFootprint(
-          footprint,
-          transport,
-          targetCountry
-        );
+        const calculatedFootprint: footprintResult =
+          await calculator.calculateFootprint(
+            footprint,
+            transport,
+            targetCountry
+          );
 
-        res.status(201).json({ ...calculatedFootprint });
+        res.status(StatusCodes.CREATED).json(calculatedFootprint);
       } catch (error) {
         next(error);
       }
@@ -48,17 +47,17 @@ export default (logger: Logger) => {
 
     if (error instanceof InvalidFootprintIdentifierError) {
       res
-        .status(400)
+        .status(StatusCodes.BAD_REQUEST)
         .set("Content-Type", "text/plain")
-        .send(`${STATUS_CODES[400]}- ${error.message}`);
+        .send(`${STATUS_CODES[StatusCodes.BAD_REQUEST]}- ${error.message}`);
     } else if (error instanceof InvalidTransportIdentifierError) {
       res
-        .status(400)
+        .status(StatusCodes.BAD_REQUEST)
         .set("Content-Type", "text/plain")
-        .send(`${STATUS_CODES[400]}- ${error.message}`);
+        .send(`${STATUS_CODES[StatusCodes.BAD_REQUEST]}- ${error.message}`);
     } else {
-      const { code = 500 } = error;
-      res.status(code).send(STATUS_CODES[code]);
+      const { code = StatusCodes.INTERNAL_SERVER_ERROR } = error;
+      res.status(code).send(`${STATUS_CODES[code]}- ${error.message}`);
     }
   };
 

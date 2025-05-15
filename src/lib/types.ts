@@ -1,5 +1,3 @@
-export type footprint_value = number;
-
 export type footprintResult = {
   result: string;
 };
