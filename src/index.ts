@@ -1,9 +1,9 @@
-import createApp from "./lib/app";
+import createFootprintApp from "./lib/footprintApp";
 import logger from "./lib/logger/logger";
 
 const { PORT = 3000 } = process.env;
 
-const app = createApp(logger);
+const app = createFootprintApp(logger);
 
 app
   .on("error", (err) => logger.error(err.stack))

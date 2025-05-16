@@ -41,7 +41,7 @@ describe("FootprintCalculator", () => {
       },
     ];
 
-    sinon.stub(calculator, "getFootprintAndTransportData").resolves({
+    sinon.stub(calculator, "getDataFromExternalServices").resolves({
       footprintData,
       transportData,
     });
@@ -52,6 +52,6 @@ describe("FootprintCalculator", () => {
       targetCountry
     );
 
-    assert.strictEqual(result.result, "10 kgCO2e");
+    assert.strictEqual(result.result, "10.00 kgCO2e");
   });
 });

@@ -1,10 +1,18 @@
-import { footprintResult, footPrintData, transportData } from "../types";
-import { getFootprintData, getTransportData } from "./externalServices";
+import { footprintResult } from "../types";
 import { Logger } from "winston";
 import InvalidFootprintIdentifierError from "../error/InvalidFootprintIdentifierError";
 import InvalidTransportIdentifierError from "../error/InvalidTransportIdentifierError";
 import logger from "../logger/logger";
+import {
+  footPrintDataResponse,
+  transportDataResponse,
+} from "./externalService/model/responseTypes";
+import FootprintService from "./externalService/FootprintService";
+import TransportService from "./externalService/TransportService";
 
+/**
+ * FootprintCalculator class to calculate the carbon footprint based on the provided footprint and transport identifiers.
+ */
 export class FootprintCalculator {
   constructor(private log: Logger) {}
 
@@ -14,7 +22,7 @@ export class FootprintCalculator {
     targetCountry: string
   ): Promise<footprintResult> {
     const { footprintData, transportData } =
-      await this.getFootprintAndTransportData(logger);
+      await this.getDataFromExternalServices(logger);
 
     this.log.info(`Finished fetching data from external services`);
 
@@ -44,22 +52,28 @@ export class FootprintCalculator {
 
     return {
       result:
-        calculatedFootprint.toString() + " " + footprintInfo.footprint_unit,
+        calculatedFootprint.toFixed(2).toString() +
+        " " +
+        footprintInfo.footprint_unit,
     };
   }
 
-  async getFootprintAndTransportData(logger: Logger): Promise<{
-    footprintData: footPrintData[];
-    transportData: transportData[];
+  async getDataFromExternalServices(logger: Logger): Promise<{
+    footprintData: footPrintDataResponse[];
+    transportData: transportDataResponse[];
   }> {
-    let footprintData: footPrintData[] = [];
-    let transportData: transportData[] = [];
+    let footprintData: footPrintDataResponse[] = [];
+    let transportData: transportDataResponse[] = [];
 
+    const footprintService = new FootprintService(logger);
+    const transportService = new TransportService(logger);
+
+    // Fetch data from external services in parallel for better performance
     await Promise.all([
-      getFootprintData(logger).then((result) => {
+      footprintService.fetchData().then((result) => {
         footprintData = result;
       }),
-      getTransportData(logger).then((result) => {
+      transportService.fetchData().then((result) => {
         transportData = result;
       }),
     ]);

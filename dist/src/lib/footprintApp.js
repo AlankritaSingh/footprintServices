@@ -49,4 +49,4 @@ exports.default = (logger) => {
     app.use(errorHandler);
     return app;
 };
-//# sourceMappingURL=app.js.map
+//# sourceMappingURL=footprintApp.js.map

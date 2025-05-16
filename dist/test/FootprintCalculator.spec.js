@@ -38,12 +38,12 @@ describe("FootprintCalculator", () => {
                 target_country: "DE",
             },
         ];
-        sinon_1.default.stub(calculator, "getFootprintAndTransportData").resolves({
+        sinon_1.default.stub(calculator, "getDataFromExternalServices").resolves({
             footprintData,
             transportData,
         });
         const result = await calculator.calculateFootprint(footprint, transport, targetCountry);
-        strict_1.default.strictEqual(result.result, "10 kgCO2e");
+        strict_1.default.strictEqual(result.result, "10.00 kgCO2e");
     });
 });
 //# sourceMappingURL=FootprintCalculator.spec.js.map

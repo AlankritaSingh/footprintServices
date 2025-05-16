@@ -4,9 +4,10 @@ import type { SinonStubbedInstance } from "sinon";
 import request from "supertest";
 import { STATUS_CODES } from "http";
 import logger from "../src/lib/logger/logger";
-import createApp from "../src/lib/app";
+import createApp from "../src/lib/footprintApp";
 import type { Application } from "express";
-import * as externalServices from "../src/lib/service/externalServices";
+import FootprintService from "../src/lib/service/externalService/FootprintService";
+import TransportService from "../src/lib/service/externalService/TransportService";
 
 describe("Footprint app", () => {
   let loggerStub: SinonStubbedInstance<typeof logger>;
@@ -18,8 +19,8 @@ describe("Footprint app", () => {
     loggerStub = sinon.stub(logger);
     app = createApp(loggerStub);
 
-    getFootprintDataStub = sinon.stub(externalServices, "getFootprintData");
-    getTransportDataStub = sinon.stub(externalServices, "getTransportData");
+    getFootprintDataStub = sinon.stub(FootprintService.prototype, "fetchData");
+    getTransportDataStub = sinon.stub(TransportService.prototype, "fetchData");
   });
 
   afterEach(() => {
@@ -60,7 +61,7 @@ describe("Footprint app", () => {
       ]);
 
       const expectedResponse = {
-        result: "10 kgCO2e",
+        result: "10.00 kgCO2e",
       };
 
       const { body } = await request(app)

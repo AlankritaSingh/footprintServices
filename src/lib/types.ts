@@ -1,18 +1,7 @@
-export type footprintResult = {
-  result: string;
-};
+import { z } from "zod";
 
-export interface footPrintData {
-  identifier: string;
-  country: string;
-  description: string;
-  footprint_value: number;
-  footprint_unit: string;
-}
+const footprintResult = z.object({
+  result: z.string(),
+});
 
-export interface transportData {
-  identifier: string;
-  factor: number;
-  origin_country: string;
-  target_country: string;
-}
+export type footprintResult = z.infer<typeof footprintResult>;
