@@ -1,6 +1,6 @@
 # Footprint Calculator
 
-This is a http based application that calculates the amount of Co2e emissions of a product, depending on how it was shipped. In order to calculate the Co2e emissions, the application uses certain approximations and assumptions which are mentioned below, along with the possible improvements and execution steps.
+This is a http based application that calculates the amount of Co2 emissions of a product, depending on how it was shipped. In order to calculate the Co2 emissions, the application uses certain assumptions which are mentioned below, along with the possible improvements and execution steps.
 
 ## Execution steps
 ### Pre-requisites
@@ -24,7 +24,13 @@ This is a http based application that calculates the amount of Co2e emissions of
   <img width="1102" alt="Screenshot 2025-05-17 at 10 15 04" src="https://github.com/user-attachments/assets/33178408-8513-4403-964a-39a4b52e063a" />
 
 ## Thought process
+The application uses the following steps to calculate the Co2 emissions:
+* "footprint", "transport" and "targetCountry" are mandatory inputs. If payload doesn't match the expected schema, the payload validation fails and displays the appropriate message to the user.
+* If no data is found for the provided "footprint" input, the request fails with Bad request error and displays appropriate message to the user.
+* If no data is found for the provided "transport" input, the request fails with Bad request error and displays appropriate message to the user.
+* The solution currently offers only Open Route Service API to get the data from external services. As the solution abstracts the external service behind an interface, it is possible to easily integrate with other service providers.
     
 ## Possible improvements
-* Introduce a retry and back-off mechansim in case of a failure in the Open Route Service API.
 * Introduce unit tests for all classes including External services. 
+* Introduce a retry and back-off mechansim in case of a failure in the Open Route Service API (external services).
+
