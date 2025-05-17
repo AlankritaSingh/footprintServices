@@ -23,5 +23,7 @@ This is a http based application that calculates the amount of Co2e emissions of
 	    "transport": "AIR",
         "targetCountry": "DE"
       }
+  <img width="1102" alt="Screenshot 2025-05-17 at 10 15 04" src="https://github.com/user-attachments/assets/33178408-8513-4403-964a-39a4b52e063a" />
+
     
 
