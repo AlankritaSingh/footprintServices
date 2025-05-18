@@ -34,5 +34,5 @@ The application uses the following steps to calculate the Co2 emissions:
     
 ## Possible improvements
 * Introduce unit tests for all classes including External services. 
-* Introduce a retry and back-off mechansim in case of a failure in the Open Route Service API (external services).
+* Introduce a retry and back-off mechansim if there is an internal error while trying to fetch the data from the Open Route Service API (external services).
 
