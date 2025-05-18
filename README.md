@@ -9,8 +9,8 @@ This is a http based application that calculates the amount of Co2 emissions of 
 - Requires express version 5.1.0.
 
 ### Build and execute tests
-* To build the application: npm run build
-* To run tests: npm test
+* To build the application: `npm run build`
+* To run tests: `npm test`
 
 ### Execute the application
 * Running the application: npm start/ npm run start
