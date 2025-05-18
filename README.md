@@ -5,8 +5,8 @@ This is a http based application that calculates the amount of Co2 emissions of 
 ## Execution steps
 ### Pre-requisites
 - Requires node v22.11.0 or higher.
-- Requires typescript version 5.8.3 or higher.
-- Requires express version 5.1.0 or higher.
+- Requires typescript version 5.8.3.
+- Requires express version 5.1.0.
 
 ### Build and execute tests
 * To build the application: npm run build
