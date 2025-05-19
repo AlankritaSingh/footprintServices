@@ -27,7 +27,7 @@ class FootprintCalculator {
             data.target_country === targetCountry &&
             data.origin_country === footprintInfo.country);
         if (!transportInfo) {
-            throw new InvalidTransportIdentifierError_1.default(transport);
+            throw new InvalidTransportIdentifierError_1.default(transport, targetCountry);
         }
         const calculatedFootprint = footprintInfo.footprint_value * transportInfo.factor;
         this.log.info(`Finished calculating footprint data`);

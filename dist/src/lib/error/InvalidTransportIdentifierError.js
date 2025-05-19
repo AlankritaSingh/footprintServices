@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class InvalidTransportIdentifierError extends Error {
-    constructor(identifier) {
-        const message = `Invalid Identifier: no transport data found for the identifier '${identifier}'`;
+    constructor(identifier, targetCountry) {
+        const message = `Invalid input: no transport data found for the transport identifier '${identifier}' or the targetCountry '${targetCountry}'`;
         super(message);
         this.name = this.constructor.name;
     }

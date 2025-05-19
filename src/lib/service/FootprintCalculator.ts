@@ -42,7 +42,7 @@ export class FootprintCalculator {
     );
 
     if (!transportInfo) {
-      throw new InvalidTransportIdentifierError(transport);
+      throw new InvalidTransportIdentifierError(transport, targetCountry);
     }
 
     const calculatedFootprint =

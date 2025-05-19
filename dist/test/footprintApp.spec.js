@@ -74,6 +74,7 @@ describe("Footprint app", () => {
                 .send(payload)
                 .expect(400);
             strict_1.default.equal(response.status, 400);
+            strict_1.default.equal(response.text, `{"error":"Invalid request body","details":[{"path":"targetCountry","message":"targetCountry is required"}]}`);
         });
         it("should return 400 with error message for invalid footprint identifier", async () => {
             const payload = {
@@ -122,7 +123,42 @@ describe("Footprint app", () => {
                 .post("/calculate")
                 .send(payload)
                 .expect(400);
-            strict_1.default.equal(response.text, `Bad Request- Invalid Identifier: no transport data found for the identifier 'invalid_transport'`);
+            strict_1.default.equal(response.text, `Bad Request- Invalid input: no transport data found for the transport identifier 'invalid_transport' or the targetCountry 'DE'`);
+        });
+        it("should return 400 with error message for not matching targetCountry", async () => {
+            const payload = {
+                footprint: "footprint1",
+                transport: "transport1",
+                targetCountry: "GB",
+            };
+            getFootprintDataStub.resolves([
+                {
+                    identifier: "footprint1",
+                    country: "IT",
+                    description: "description1",
+                    footprint_value: 5,
+                    footprint_unit: "kgCO2e",
+                },
+            ]);
+            getTransportDataStub.resolves([
+                {
+                    identifier: "transport1",
+                    factor: 2,
+                    origin_country: "IT",
+                    target_country: "DE",
+                },
+                {
+                    identifier: "transport1",
+                    factor: 3,
+                    origin_country: "FR",
+                    target_country: "DE",
+                },
+            ]);
+            const response = await (0, supertest_1.default)(app)
+                .post("/calculate")
+                .send(payload)
+                .expect(400);
+            strict_1.default.equal(response.text, `Bad Request- Invalid input: no transport data found for the transport identifier 'transport1' or the targetCountry 'GB'`);
         });
         it("should return 500 for unexpected errors", async () => {
             const payload = {
