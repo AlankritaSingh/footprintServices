@@ -29,7 +29,7 @@ This is a http based application that calculates the amount of Co2 emissions of 
 The application uses the following steps to calculate the Co2 emissions:
 * "footprint", "transport" and "targetCountry" are mandatory inputs. If payload doesn't match the expected schema, the payload validation fails and displays the appropriate message to the user.
 * If no data is found for the provided "footprint" input, the request fails with Bad request error and displays appropriate message to the user.
-* If no data is found for the provided "transport" input, the request fails with Bad request error and displays appropriate message to the user.
+* If no data is found for the provided "transport" or "targetCountry" input, the request fails with Bad request error and displays appropriate message to the user.
 * The solution currently offers only Open Route Service API to get the data from external services. As the solution abstracts the external service behind an interface, it is possible to easily integrate with other service providers.
     
 ## Possible improvements
